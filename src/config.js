@@ -10,7 +10,7 @@ nconf.defaults({
   isProduction: process.env.NODE_ENV === 'production',
   locales: ['en', 'ru'],
   port: process.env.PORT || 8000,
-  remoteHotReload: false,
+  disableVerifying: false,
   sentryUrl: '',
   userSecret: '',
 });

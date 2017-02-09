@@ -21,5 +21,7 @@
     "database": "synctrello",
     "user": "syncTrelloAdmin",
     "pwd": "syncTrelloAdminPassword"
-  }
+  },
+
+  "disableVerifying": false
 }
