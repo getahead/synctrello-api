@@ -1,0 +1,25 @@
+{
+  "SENTRY_URL": "",
+
+  "FRONT_APP_HOST": "https://synctrello.com",
+
+  "API_URL": "https://trello.com/",
+
+  "TRELLO_API_KEY": "8946c831b15b335bf71eec9733a09ff7",
+  "TRELLO_SECRET": "f9cdeb4b8dbb0a6da90c9db4e98105fee2aefdccef1ba52c80c2fcfdfff9bbfd",
+
+  "TRELLO_ALLOWED_IPS": [
+    "107.23.104.115",
+    "107.23.149.70",
+    "54.152.166.250",
+    "54.164.77.56"
+  ],
+
+  "mongo": {
+    "host": "5.101.117.249",
+    "port": "27017",
+    "database": "synctrello",
+    "user": "syncTrelloAdmin",
+    "pwd": "syncTrelloAdminPassword"
+  }
+}

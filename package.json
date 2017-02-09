@@ -1,0 +1,30 @@
+{
+  "name": "synctrello-webhook",
+  "version": "1.0.0",
+  "description": "syncTrello webhook server",
+  "main": "src/index.js",
+  "repository": "git@5.101.117.249:synctrello-webhook.git",
+  "author": "Michael Petrov <imrealpunk@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "babel-runtime": "^6.22.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "crypto": "^0.0.3",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1",
+    "morgan": "^1.8.0",
+    "nconf": "^0.8.4",
+    "node-fetch": "^1.6.3",
+    "nodemon": "^1.11.0",
+    "raven": "^1.1.2",
+    "urijs": "^1.18.5",
+    "winston": "^2.3.1"
+  }
+}

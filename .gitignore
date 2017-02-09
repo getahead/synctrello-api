@@ -1,0 +1,9 @@
+node_modules/
+.idea
+.DS_Store
+atlassian-ide-plugin.xml
+*.ipr
+*.iws
+*.iml
+
+config.json

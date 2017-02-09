@@ -1,0 +1,13 @@
+{
+  "apps" : [{
+    "name": "synctrello-webhook",
+    "script": "src/index.js",
+    "instances" : 2,
+    "exec_mode" : "cluster",
+    "kill_timeout" : 30000,
+    "env": {
+      "NODE_ENV": "production",
+      "BABEL_DISABLE_CACHE": 1
+    }
+  }]
+}
