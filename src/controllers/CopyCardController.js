@@ -23,11 +23,10 @@ action: {
 */
 
 export const copyCardController = (req, res, next) => {
-  const {id, date, data, memberCreator} = req.body.action;
+  const {date, data, memberCreator} = req.body.action;
 
-  console.log(data)
   BindingModel.createOrUpdateBinding({
-    idCard: id,
+    idCard: data.card.id,
     idBindedCard: data.cardSource.id,
     date,
     idMember: memberCreator.id,
