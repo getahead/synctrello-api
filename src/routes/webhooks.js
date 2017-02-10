@@ -83,6 +83,7 @@ router.all('/:member', (req, res, next) => {
     const action = req.body.action.type;
     const controller = ACTION_TYPES[action] && ACTION_TYPES[action].controller;
 
+    console.log(action)
     if (controller && typeof controller === 'function') {
       controller(req, res, next);
     }
