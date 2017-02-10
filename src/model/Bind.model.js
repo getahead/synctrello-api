@@ -69,11 +69,19 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     }
   }
 
-  return Binding.findOneAndUpdate({idCard}, bindingMapper, {
+  return Binding.findOneAndUpdate({idCard, idBindedCard}, bindingMapper, {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true
-  }).lean().then(binding => binding)
+  }).lean()
+    .then(binding => binding)
+};
+
+BindingSchema.statics.getBindedCards = function (idCard, limit = 20) {
+
+  return this.find({idCard}).limit(limit)
+    .lean()
+    .then(bindings => bindings)
 };
 
 const BindingModel = mongoose.model('Binding', BindingSchema);
