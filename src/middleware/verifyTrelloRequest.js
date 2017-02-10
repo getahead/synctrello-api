@@ -1,6 +1,7 @@
 import URI from 'urijs';
 import crypto from 'crypto';
 import config from '../config';
+import {authorizeUserByLocalToken} from '../controllers/UserController';
 import {notFoundController} from '../controllers/CommonController';
 
 const verifyTrelloWebhookRequest = (request, secret, callbackURL) => {
@@ -15,14 +16,26 @@ const verifyTrelloWebhookRequest = (request, secret, callbackURL) => {
 };
 
 export default function (req, res, next) {
-  if (req.method === 'POST') {
+  if (req.params.member && req.method === 'POST') {
     const callbackURL = URI(req.origin).pathname(req.originalUrl).toString();
     const verifyResult = verifyTrelloWebhookRequest(req, config.TRELLO_SECRET, callbackURL);
 
     if (!verifyResult && !config.disableVerifying) {
       return notFoundController(req, res);
     }
-  }
 
-  return next();
+    return authorizeUserByLocalToken(req.params.member)
+      .then(result => {
+        res.user = {
+          isLoggedIn: true,
+          profile: result.profile,
+          trelloToken: result.trelloToken
+        };
+
+        return next();
+      })
+      .catch(err => notFoundController(req, res));
+  } else {
+    return next();
+  }
 }

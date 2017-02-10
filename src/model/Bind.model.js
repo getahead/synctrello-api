@@ -38,7 +38,7 @@ const BindingSchema = new Schema({
 
 BindingSchema.statics.createOrUpdateBinding = function ({
   action = 'create',
-  userId,
+  userId, // webhook owner
   idBinding,
   idCard,
   idBindedCard,
@@ -48,22 +48,24 @@ BindingSchema.statics.createOrUpdateBinding = function ({
   enabled = true
 }) {
   const Binding = this;
+
+  // editable fields
   let bindingMapper = {
-    idCard,
-    idBindedCard,
-    bindingEnabled: enabled
+    bindingEnabled: enabled,
+    lastSynced: date,
+    userNameLastSynced: username,
+    userLastSynced: idMember
   };
 
   if (action === 'create') {
     bindingMapper = {
       ...bindingMapper,
-      userId,
+      idCard,
+      idBindedCard,
+      userId, // webhook owner
       idBinding,
       userCreated: idMember,
-      userLastSynced: idMember,
-      userNameCreated: username,
-      userNameLastSynced: username,
-      lastSynced: date,
+      userNameCreated: username
     }
   }
 
