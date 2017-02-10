@@ -12,8 +12,9 @@ import verifyTrelloRequest from './middleware/verifyTrelloRequest';
 import routes from './routes';
 
 const app = express();
-
+app.disable('x-powered-by');
 app.enable('strict routing');
+
 app.use(slashesMiddleware);
 app.use(checkUriMiddleware);
 

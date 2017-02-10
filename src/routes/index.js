@@ -7,6 +7,9 @@ const router = express.Router();
 
 router.use('/webhooks', webhooks);
 
+router.get('/favicon.ico', function(req, res) {
+  res.send(204);
+});
 router.all('*', notFoundController);
 
 export default router;
