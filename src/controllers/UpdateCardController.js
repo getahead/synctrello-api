@@ -9,18 +9,19 @@ export const editCard = (req, res, next) => {
 export const updateCardController = (req, res, next) => {
   const {date, data, memberCreator} = req.body.action;
 
-  Promise.all([
-    BindingModel.createOrUpdateBinding({
-      action: 'update',
-      date,
-      idCard: data.card.id,
-      idMember: memberCreator.id,
-      username: memberCreator.username
-    }),
+  BindingModel.createOrUpdateBinding({
+    action: 'update',
+    date,
+    idCard: data.card.id,
+    idMember: memberCreator.id,
+    username: memberCreator.username
+  }).then(binding => {
 
-    requests.updateCard({card: data.card, id: data.card.id, token: res.user.trelloToken})
-  ]).then(result => {
+    console.log(binding)
+    return requests.updateCard({card: data.card, id: binding.idBindedCard, token: res.user.trelloToken})
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+  });
 
-    return result;
-  })
+  res.send(200);
 };
