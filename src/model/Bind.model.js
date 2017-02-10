@@ -3,11 +3,19 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const BindingSchema = new Schema({
+  idBinding: {
+    type: String,
+    required: true
+  },
   idCard: {
     type: String,
     required: true
   },
   idBindedCard: {
+    type: String,
+    required: true
+  },
+  userId: {
     type: String,
     required: true
   },
@@ -30,6 +38,8 @@ const BindingSchema = new Schema({
 
 BindingSchema.statics.createOrUpdateBinding = function ({
   action = 'create',
+  userId,
+  idBinding,
   idCard,
   idBindedCard,
   date,
@@ -47,6 +57,8 @@ BindingSchema.statics.createOrUpdateBinding = function ({
   if (action === 'create') {
     bindingMapper = {
       ...bindingMapper,
+      userId,
+      idBinding,
       userCreated: idMember,
       userLastSynced: idMember,
       userNameCreated: username,
@@ -55,7 +67,6 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     }
   }
 
-  console.log(bindingMapper)
   return Binding.findOneAndUpdate({idCard}, bindingMapper, {
     upsert: true,
     new: true,
