@@ -77,7 +77,7 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     .then(binding => binding)
 };
 
-BindingSchema.statics.getBindedCards = function (idCard, limit = 20) {
+BindingSchema.statics.getBindedCards = function ({idCard, limit = 20}) {
 
   return this.find({idCard}).limit(limit)
     .lean()

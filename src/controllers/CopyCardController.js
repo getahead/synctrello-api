@@ -5,7 +5,7 @@ const DEFAULT_DOUNBLE_BINDING_CARDS = true;
 export const copyCardController = (req, res, next) => {
   const {id, date, data, memberCreator} = req.body.action;
 
-  Promise.all([
+  return Promise.all([
     BindingModel.createOrUpdateBinding({
       date,
       userId: req.params.member,
@@ -25,8 +25,5 @@ export const copyCardController = (req, res, next) => {
       idMember: memberCreator.id,
       username: memberCreator.username
     })
-  ]).then(result => {
-
-    return result;
-  })
+  ]).then(result => result)
 };
