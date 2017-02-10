@@ -34,7 +34,7 @@ router.all('/:member', (req, res, next) => {
     }
   }
 
-  res.status(200).send();
+  res.sendStatus(200);
 });
 
 export default router;

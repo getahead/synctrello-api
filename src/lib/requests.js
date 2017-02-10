@@ -5,14 +5,10 @@ import makeRequest from './makeRequest';
 const TRELLO_API = new URI(config.API_URL);
 
 export const updateCard = ({card, id, token}) => {
-  console.log({card, id, token});
-  console.log(TRELLO_API.clone()
-    .pathname(`/1/cards/${id}`)
-    .query({key: config.TRELLO_API_KEY, token})
-    .toString())
+
   return makeRequest(TRELLO_API.clone()
     .pathname(`/1/cards/${id}`)
-    .query({key: config.TRELLO_API_KEY, token})
+    .query({key: config.TRELLO_API_KEY})
     .toString(), {
       method: 'PUT',
       body: JSON.stringify({

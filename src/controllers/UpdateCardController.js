@@ -24,5 +24,5 @@ export const updateCardController = (req, res, next) => {
       .catch(err => console.log(err))
   });
 
-  res.send(200);
+  res.sendStatus(200);
 };
