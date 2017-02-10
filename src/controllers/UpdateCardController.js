@@ -9,6 +9,7 @@ export const editCard = (req, res, next) => {
 export const updateCardController = (req, res, next) => {
   const {date, data, memberCreator} = req.body.action;
 
+  console.log(req.body.action)
   BindingModel.createOrUpdateBinding({
     action: 'update',
     date,

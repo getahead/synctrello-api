@@ -25,9 +25,9 @@ router.all('/:member', (req, res, next) => {
     const action = req.body.action.type;
     const controller = ACTION_TYPES[action] && ACTION_TYPES[action].controller;
 
-    console.log(action)
-    console.log(req.body)
-    console.log(req.body.action.data)
+    // console.log(action)
+    // console.log(req.body)
+    // console.log(req.body.action.data)
 
     if (controller && typeof controller === 'function') {
       controller(req, res, next);
