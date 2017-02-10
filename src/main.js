@@ -7,6 +7,7 @@ import serverUrlMiddleware from './middleware/originUrlMiddleware';
 import slashesMiddleware from './middleware/slashes';
 import checkUriMiddleware from './middleware/checkUri';
 import verifyTrelloRequest from './middleware/verifyTrelloRequest';
+import mongoose from './lib/mongoose';
 
 
 import routes from './routes';
