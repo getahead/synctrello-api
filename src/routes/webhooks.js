@@ -30,11 +30,13 @@ router.all('/:member', (req, res, next) => {
     // console.log(req.body.action.data)
 
     if (controller && typeof controller === 'function') {
-      controller(req, res, next);
+      return controller(req, res, next)
+        .then(response => res.sendStatus(200))
+        .catch(err => res.sendStatus(200));
     }
   }
 
-  res.sendStatus(200);
+  return res.sendStatus(200);
 });
 
 export default router;

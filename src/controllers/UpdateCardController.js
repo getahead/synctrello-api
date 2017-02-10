@@ -10,7 +10,7 @@ export const updateCardController = (req, res, next) => {
   const {date, data, memberCreator} = req.body.action;
 
   console.log(req.body.action)
-  BindingModel.createOrUpdateBinding({
+  return BindingModel.createOrUpdateBinding({
     action: 'update',
     date,
     idCard: data.card.id,
@@ -20,7 +20,5 @@ export const updateCardController = (req, res, next) => {
 
     console.log(binding)
     return requests.updateCard({card: data.card, id: binding.idBindedCard, token: res.user.trelloToken})
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
   });
 };
