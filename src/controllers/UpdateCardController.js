@@ -20,10 +20,10 @@ export const updateCardController = (req, res, next) => {
     return BindingModel.getBindedCards({idCard: data.card.id})
     .then(binding => {
       console.log(binding)
-      return Promise.all(binding.reduce((promises, bindedId) =>
+      return Promise.all(binding.reduce((promises, bind) =>
         promises.concat(requests.updateCard({
           card: data.card,
-          id: bindedId,
+          id: bind.idBindedCard,
           token: res.user.trelloToken
         })),[]
       ));

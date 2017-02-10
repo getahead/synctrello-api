@@ -81,7 +81,7 @@ BindingSchema.statics.getBindedCards = function ({idCard, limit = 20}) {
 
   return this.find({idCard}).limit(limit)
     .lean()
-    .then(bindings => bindings.idBindedCard)
+    .then(bindings => bindings)
 };
 
 const BindingModel = mongoose.model('Binding', BindingSchema);
