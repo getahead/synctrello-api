@@ -19,9 +19,16 @@ export const updateCardController = (req, res, next) => {
   // })
     return BindingModel.getBindedCards({idCard: data.card.id})
     .then(binding => {
+      return Promise.all(binding.reduce((promises, bindedId) =>
+        promises.concat(requests.updateCard({
+          card: data.card,
+          id: bindedId,
+          token: res.user.trelloToken
+        })),[]
+      ));
 
-    console.log(binding)
-      return binding;
+    // console.log(binding)
+    //   return binding;
     // return requests.updateCard({card: data.card, id: binding.idBindedCard, token: res.user.trelloToken})
   });
 };
