@@ -17,7 +17,7 @@ const verifyTrelloWebhookRequest = (request, secret, callbackURL) => {
 export default function (req, res, next) {
   if (req.method === 'POST') {
     const callbackURL = URI(req.origin).pathname(req.originalUrl).toString();
-    const verifyResult = verifyTrelloWebhookRequest(req, config.TRELLO_SECRET, callbackURL)
+    const verifyResult = verifyTrelloWebhookRequest(req, config.TRELLO_SECRET, callbackURL);
 
     if (!verifyResult && !config.disableVerifying) {
       return notFoundController(req, res);

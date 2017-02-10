@@ -55,11 +55,12 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     }
   }
 
+  console.log(bindingMapper)
   return Binding.findOneAndUpdate({idCard}, bindingMapper, {
     upsert: true,
     new: true,
     setDefaultsOnInsert: true
-  }).lean()
+  }).lean().then(binding => binding)
 };
 
 const BindingModel = mongoose.model('Binding', BindingSchema);
