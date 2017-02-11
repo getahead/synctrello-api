@@ -77,8 +77,8 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     .then(binding => binding)
 };
 
-BindingSchema.statics.getBindedCards = function ({condition, limit = 20}) {
-  if (!condition) {
+BindingSchema.statics.getBindedCards = function ({condition}, limit = 20) {
+  if (condition) {
     return Promise.resolve([]);
   }
 

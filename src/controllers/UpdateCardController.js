@@ -20,7 +20,6 @@ export const updateCardController = (req, res, next) => {
   const updatedCard = action.data.card;
 
   return Promise.all([
-    // Double binding
     ...BindingModel.getBindedCards({idBindedCard: updatedCard.id})
       .then(bindings => updateBindingsData(bindings, action)),
 
@@ -34,5 +33,5 @@ export const updateCardController = (req, res, next) => {
             token: res.user.trelloToken
           })), [])
       ])
-  ])
+  ]);
 };
