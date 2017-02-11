@@ -79,14 +79,14 @@ BindingSchema.statics.createOrUpdateBinding = function ({
 
 BindingSchema.statics.getBindedCards = function ({idCard, limit = 20}) {
 
-  return this.find({idCard}).limit(limit)
+  return this.find({$or: [{idCard: idCard}, { idBindedCard: idCard }]}).limit(limit)
     .lean()
     .then(bindings => bindings)
 };
 
 BindingSchema.statics.deleteBindings = function ({idCard}) {
 
-  return this.remove({$or: [{idCard: idCard}, { idBindedCard: idCard } ] })
+  return this.remove({$or: [{idCard: idCard}, { idBindedCard: idCard }]})
     .lean()
     .then(bindings => bindings)
 };
