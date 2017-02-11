@@ -2,11 +2,13 @@ import BindingModel from '../model/Bind.model';
 import * as requests from '../lib/requests';
 
 export const updateCardController = (req, res, next) => {
-  const {data, date, username, memberCreator} = req.body.action;
+  const {data, date, memberCreator} = req.body.action;
 
   return BindingModel.getBindedCards({idCard: data.card.id})
     .then(binding =>
       Promise.all([
+        // 1) Логировать последнюю синхронизацию
+        // 2) отключать синхронизацию при архивировании
         ...binding.reduce((promises, bind) =>
           promises.concat(BindingModel.createOrUpdateBinding({
             action: 'edit',
@@ -14,8 +16,8 @@ export const updateCardController = (req, res, next) => {
             idCard: bind.idBindedCard,
             idBindedCard: data.card.id,
             enabled: !data.card.closed,
-            userNameLastSynced: memberCreator.username,
-            userLastSynced: memberCreator.id
+            username: memberCreator.username,
+            idMember: memberCreator.id
           })), []),
 
         ...binding.reduce((promises, bind) =>
