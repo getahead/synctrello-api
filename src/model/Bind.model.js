@@ -69,7 +69,6 @@ BindingSchema.statics.createOrUpdateBinding = function ({
     }
   }
 
-  console.log({idCard, idBindedCard})
   return Binding.findOneAndUpdate({idCard, idBindedCard}, bindingMapper, {
     upsert: true,
     new: true,

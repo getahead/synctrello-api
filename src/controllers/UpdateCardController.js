@@ -5,8 +5,21 @@ export const updateCardController = (req, res, next) => {
   const {data, date, memberCreator} = req.body.action;
 
   return BindingModel.getBindedCards({idCard: data.card.id})
-    .then(binding =>
-      Promise.all([
+    .then(binding => {
+      console.log(binding.reduce((promises, bind) =>
+        promises.concat({
+          action: 'edit',
+          date,
+          // idCard: data.card.id === bind.idCard ? bind.idCard : bind.idBindedCard,
+          // idBindedCard: data.card.id === bind.idBindedCard ? data.card.id : bind.idBindedCard,
+          idCard: bind.idCard,
+          idBindedCard: bind.idBindedCard,
+          enabled: !data.card.closed,
+          username: memberCreator.username,
+          idMember: memberCreator.id
+        }), []),);
+
+      return Promise.all([
         // 1) Логировать последнюю синхронизацию
         // 2) отключать синхронизацию при архивировании
         ...binding.reduce((promises, bind) =>
@@ -23,11 +36,11 @@ export const updateCardController = (req, res, next) => {
           })), []),
 
         ...binding.reduce((promises, bind) =>
-          bind.bindingEnabled && promises.concat(requests.updateCard({
-            card: data.card,
-            id: bind.idBindedCard,
-            token: res.user.trelloToken
-          })), [])
+        bind.bindingEnabled && promises.concat(requests.updateCard({
+          card: data.card,
+          id: bind.idBindedCard,
+          token: res.user.trelloToken
+        })), [])
       ])
-    )
+    })
 };
