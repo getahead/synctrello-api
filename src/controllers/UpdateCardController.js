@@ -10,7 +10,7 @@ const updateBindingsData = (binding, {date, memberCreator, data}) =>
       date,
       idCard: bind.idCard,
       idBindedCard: bind.idBindedCard,
-      enabled: !data.card.closed,
+      enabled: data.old.closed === data.card.closed ? !data.card.closed : bind.enabled,
       username: memberCreator.username,
       idMember: memberCreator.id
     })), []);
