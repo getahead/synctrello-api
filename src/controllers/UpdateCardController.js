@@ -12,6 +12,7 @@ export const updateCardController = (req, res, next) => {
             action: 'edit',
             date,
             idCard: bind.idBindedCard,
+            idBindedCard: data.card.id,
             enabled: !bind.closed,
             userNameLastSynced: memberCreator.username,
             userLastSynced: memberCreator.id
