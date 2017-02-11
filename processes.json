@@ -1,6 +1,6 @@
 {
   "apps" : [{
-    "name": "synctrello-webhook",
+    "name": "api-synctrello",
     "script": "src/index.js",
     "instances" : 2,
     "exec_mode" : "cluster",
