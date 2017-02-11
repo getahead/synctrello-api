@@ -17,7 +17,7 @@ const updateBindingsData = (binding, {date, memberCreator, data}) =>
 
 export const updateCardController = (req, res, next) => {
   const action = req.body.action;
-  const updatedCard = data.card;
+  const updatedCard = action.data.card;
 
   return Promise.all([
     BindingModel.getBindedCards({idBindedCard: updatedCard.id})
