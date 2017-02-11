@@ -27,3 +27,9 @@ export const copyCardController = (req, res, next) => {
     })
   ]).then(result => result)
 };
+
+export const deleteCardController = (req, res, next) => {
+  const {data} = req.body.action;
+
+  return BindingModel.deleteBindings({id: data.card.id});
+};

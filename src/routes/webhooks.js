@@ -2,7 +2,7 @@ import express from 'express';
 
 import verifyTrelloRequest from '../middleware/verifyTrelloRequest';
 
-import {copyCardController} from '../controllers/CopyCardController';
+import {copyCardController, deleteCardController} from '../controllers/BindingCardController';
 import {updateCardController} from '../controllers/UpdateCardController';
 
 const router = express.Router();
@@ -15,6 +15,10 @@ const ACTION_TYPES = {
   updateCard: {
     name: 'updateCard',
     controller: updateCardController
+  },
+  deleteCard: {
+    name: 'deleteCard',
+    controller: deleteCardController
   }
 };
 
