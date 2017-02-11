@@ -14,7 +14,7 @@ export const updateCardController = (req, res, next) => {
             action: 'edit',
             date,
             idCard: data.card.id === bind.idCard ? bind.idCard : bind.idBindedCard,
-            idBindedCard: data.card.id === bind.idBindedCard ? bind.idBindedCard : data.card.id,
+            idBindedCard: data.card.id === bind.idCard ? bind.idBindedCard : data.card.id,
             enabled: !data.card.closed,
             username: memberCreator.username,
             idMember: memberCreator.id
