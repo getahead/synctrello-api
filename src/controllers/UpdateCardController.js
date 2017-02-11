@@ -17,16 +17,17 @@ const updateBindingsData = (binding, {date, memberCreator, data}) =>
 
 export const updateCardController = (req, res, next) => {
   const action = req.body.action;
+  const updatedCard = data.card;
 
   return Promise.all([
-    BindingModel.getBindedCards({idBindedCard: data.card.id})
+    BindingModel.getBindedCards({idBindedCard: updatedCard.id})
       .then(bindings => updateBindingsData(bindings, action)),
 
-    BindingModel.getBindedCards({idCard: data.card.id})
+    BindingModel.getBindedCards({idCard: updatedCard.id})
       .then(bindings => updateBindingsData(bindings, action))
       .then(bindings => bindings.reduce((promises, bind) =>
         bind.bindingEnabled && promises.concat(requests.updateCard({
-          card: data.card,
+          card: updatedCard,
           id: bind.idBindedCard,
           token: res.user.trelloToken
         })), []))
