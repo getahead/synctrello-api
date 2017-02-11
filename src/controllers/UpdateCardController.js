@@ -6,6 +6,7 @@ export const updateCardController = (req, res, next) => {
 
   return BindingModel.getBindedCards({idCard: data.card.id})
     .then(binding => {
+      console.log(binding.length)
       console.log(binding.reduce((promises, bind) =>
         promises.concat({
           action: 'edit',
