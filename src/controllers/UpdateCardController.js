@@ -13,8 +13,8 @@ export const updateCardController = (req, res, next) => {
           promises.concat(BindingModel.createOrUpdateBinding({
             action: 'edit',
             date,
-            idCard: data.card.id === bind.idCard ? bind.idCard : bind.idBindedCard,
-            idBindedCard: data.card.id === bind.idCard ? bind.idBindedCard : data.card.id,
+            idCard: bind.idCard,
+            idBindedCard: bind.idBindedCard,
             enabled: !data.card.closed,
             username: memberCreator.username,
             idMember: memberCreator.id
