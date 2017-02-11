@@ -13,7 +13,7 @@ export const updateCardController = (req, res, next) => {
             date,
             idCard: bind.idBindedCard,
             idBindedCard: data.card.id,
-            enabled: !bind.closed,
+            enabled: !data.card.closed,
             userNameLastSynced: memberCreator.username,
             userLastSynced: memberCreator.id
           })), []),
