@@ -20,17 +20,26 @@ export const updateCardController = (req, res, next) => {
   const updatedCard = action.data.card;
 
   return Promise.all([
-    BindingModel.getBindedCards({idBindedCard: updatedCard.id})
+    ...BindingModel.getBindedCards({idBindedCard: updatedCard.id})
       .then(bindings => updateBindingsData(bindings, action)),
 
-    BindingModel.getBindedCards({idCard: updatedCard.id})
-      .then(bindings => updateBindingsData(bindings, action))
-      .then(bindings => bindings.reduce((promises, bind) =>
-        bind.bindingEnabled && promises.concat(requests.updateCard({
-          card: updatedCard,
-          id: bind.idBindedCard,
-          token: res.user.trelloToken
-        })), []))
+    ...BindingModel.getBindedCards({idCard: updatedCard.id})
+      .then(bindings => [
+        ...updateBindingsData(bindings, action),
+        ...bindings.reduce((promises, bind) =>
+          bind.bindingEnabled && promises.concat(requests.updateCard({
+            card: updatedCard,
+            id: bind.idBindedCard,
+            token: res.user.trelloToken
+          })), [])
+      ])
+      // .then(bindings => updateBindingsData(bindings, action))
+      // .then(bindings => bindings.reduce((promises, bind) =>
+      //   bind.bindingEnabled && promises.concat(requests.updateCard({
+      //     card: updatedCard,
+      //     id: bind.idBindedCard,
+      //     token: res.user.trelloToken
+      //   })), []))
   ]).then(response => {console.log(response); return response;});
 
   /*
