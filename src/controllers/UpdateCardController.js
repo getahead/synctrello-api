@@ -18,7 +18,7 @@ export const updateCardController = (req, res, next) => {
           })), []),
 
         ...binding.reduce((promises, bind) =>
-          promises.concat(requests.updateCard({
+          bind.bindingEnabled && promises.concat(requests.updateCard({
             card: data.card,
             id: bind.idBindedCard,
             token: res.user.trelloToken
