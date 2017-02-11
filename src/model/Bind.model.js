@@ -86,7 +86,7 @@ BindingSchema.statics.getBindedCards = function ({idCard, limit = 20}) {
 
 BindingSchema.statics.deleteBindings = function ({idCard}) {
 
-  return this.deleteMany({$or: [{idCard: idCard}, { idBindedCard: idCard } ] })
+  return this.remove({$or: [{idCard: idCard}, { idBindedCard: idCard } ] })
     .lean()
     .then(bindings => bindings)
 };
