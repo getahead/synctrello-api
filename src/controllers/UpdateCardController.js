@@ -1,8 +1,6 @@
 import BindingModel from '../model/Bind.model';
 import * as requests from '../lib/requests';
 
-
-
 const updateBindingsData = (binding, {date, memberCreator, data}) =>
   binding.reduce((promises, bind) =>
     promises.concat(BindingModel.createOrUpdateBinding({
