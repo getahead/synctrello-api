@@ -82,6 +82,7 @@ BindingSchema.statics.getBindedCards = function ({condition}, limit = 20) {
     return Promise.resolve([]);
   }
 
+  console.log(condition)
   return this.find(condition)
     .limit(limit)
     .lean()
