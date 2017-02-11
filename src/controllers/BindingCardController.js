@@ -2,6 +2,7 @@ import BindingModel from '../model/Bind.model';
 
 const DEFAULT_DOUNBLE_BINDING_CARDS = true;
 
+
 export const copyCardController = (req, res, next) => {
   const {id, date, data, memberCreator} = req.body.action;
 
@@ -31,7 +32,7 @@ export const copyCardController = (req, res, next) => {
 export const deleteCardController = (req, res, next) => {
   const {data} = req.body.action;
 
-  return BindingModel.deleteBindings({id: data.card.id})
+  return BindingModel.deleteBindings({idCard: data.card.id})
     .then(res => {
       console.log(res)
       return res;
