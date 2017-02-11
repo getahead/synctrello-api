@@ -33,8 +33,4 @@ export const deleteCardController = (req, res, next) => {
   const {data} = req.body.action;
 
   return BindingModel.deleteBindings({idCard: data.card.id})
-    .then(res => {
-      console.log(res)
-      return res;
-    });
 };
