@@ -17,7 +17,7 @@ router.get('/trello', (req, res) => {
           expiration: 'never',
           name: 'SyncoBot',
           response_type: 'token',
-          return_url: `${config.frontUrl}/action/social-login/finish/`,
+          return_url: `${req.query.origin || config.frontUrl}/action/social-login/finish/`,
           callback_method: `postMessage`,
           scope: ['account', 'read', 'write'].join(',')
         })
