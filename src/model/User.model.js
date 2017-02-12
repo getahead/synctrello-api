@@ -105,8 +105,7 @@ UserSchema.statics.findUserAndSync = function (trelloToken, trelloUser, updateTo
  * @returns {Promise}
  */
 UserSchema.statics.authorizeUserByVerifiedTokenId = function (id) {
-  const User = this;
-  return User.findOne({_id: id})
+  return this.findById(id)
     .then(user => ({
       trelloToken: user.trelloToken,
       profile: mapOutputUser(user)

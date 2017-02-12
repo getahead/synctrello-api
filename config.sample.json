@@ -1,10 +1,11 @@
 {
+  "serverUrl": "https://api.synctrello.com",
+  "frontUrl": "https://synctrello.com",
+  "userSecret": "syncTrello-secret-2411989",
+
   "SENTRY_URL": "",
 
-  "FRONT_APP_HOST": "https://synctrello.com",
-
   "API_URL": "https://trello.com/",
-
   "TRELLO_API_KEY": "8946c831b15b335bf71eec9733a09ff7",
   "TRELLO_SECRET": "f9cdeb4b8dbb0a6da90c9db4e98105fee2aefdccef1ba52c80c2fcfdfff9bbfd",
 
