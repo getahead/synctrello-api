@@ -10,6 +10,7 @@ export default function userMiddleware(req, res, next) {
     trelloToken: ''
   };
 
+  console.log(token)
   if (!token) {
     return next();
   }
@@ -19,7 +20,7 @@ export default function userMiddleware(req, res, next) {
     decoded = jwt.verify(token, config.userSecret);
   }
   catch(e) {
-    return next(e);
+    return next();
   }
 
   if (!decoded) {

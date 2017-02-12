@@ -10,7 +10,7 @@ router.use('/api/v1', api);
 router.use('/webhooks', webhooks);
 
 router.get('/favicon.ico', function(req, res) {
-  res.send(204);
+  res.sendStatus(204);
 });
 router.all('*', notFoundController);
 
