@@ -10,7 +10,6 @@ export default function userMiddleware(req, res, next) {
     trelloToken: ''
   };
 
-  console.log(token)
   if (!token) {
     return next();
   }

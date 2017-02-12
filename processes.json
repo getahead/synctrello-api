@@ -8,6 +8,7 @@
     "env": {
       "NODE_ENV": "production",
       "BABEL_DISABLE_CACHE": 1,
+      "NODE_TLS_REJECT_UNAUTHORIZED": 0,
       "PORT": 3002
     }
   }]
