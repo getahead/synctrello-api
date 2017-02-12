@@ -63,7 +63,14 @@ router.get('/webhook', (req, res) => {
   }
 
   return promise
-    .then(response => res.send(response))
+    .then(response => res.send({
+      ...response,
+      data: {
+        active: response.data.active,
+        id: response.data.id,
+        idModel: response.data.idModel
+      }
+    }))
     .catch(err => res.send(err))
 
 
