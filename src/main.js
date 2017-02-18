@@ -16,7 +16,7 @@ import routes from './routes';
 const app = express();
 
 if (config.isProduction) {
-  app.use(raven.middleware.express.requestHandler(config.SENTRY_URL));
+  app.use(raven.middleware.express.requestHandler(config.SENTRY_DSN));
 }
 
 app.disable('x-powered-by');
@@ -34,7 +34,7 @@ app.use(modifyResponse);
 app.use(routes);
 
 if (config.isProduction) {
-  app.use(raven.middleware.express.errorHandler(config.SENTRY_URL));
+  app.use(raven.middleware.express.errorHandler(config.SENTRY_DSN));
 }
 
 app.get('*', errorHandler);

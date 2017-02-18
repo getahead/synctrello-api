@@ -11,7 +11,6 @@ nconf.defaults({
   locales: ['en', 'ru'],
   port: process.env.PORT || 8000,
   disableVerifying: false,
-  sentryUrl: '',
   userSecret: '',
 });
 

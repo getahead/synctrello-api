@@ -12,6 +12,9 @@ router.use('/webhooks', webhooks);
 router.get('/favicon.ico', function(req, res) {
   res.sendStatus(204);
 });
+router.get('/trigger500', (req, res, next) => {
+  throw new Error();
+});
 router.all('*', notFoundController);
 
 export default router;
