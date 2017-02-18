@@ -8,7 +8,7 @@ const verifyTrelloWebhookRequest = (request, secret, callbackURL) => {
   const base64Digest = (s) =>
     crypto.createHmac('sha1', secret).update(s).digest('base64');
 
-  const content = request.body + callbackURL;
+  const content = JSON.stringify(request.body) + callbackURL;
   const doubleHash = base64Digest(base64Digest(content));
   const headerHash = base64Digest(request.headers['x-trello-webhook'] || '');
 

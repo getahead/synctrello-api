@@ -7,12 +7,18 @@ import serverUrlMiddleware from './middleware/originUrlMiddleware';
 import slashesMiddleware from './middleware/slashes';
 import checkUriMiddleware from './middleware/checkUri';
 import modifyResponse from './middleware/modifyResponse';
+import raven from 'raven'
 import mongoose from './lib/mongoose';
 
 
 import routes from './routes';
 
 const app = express();
+
+if (config.isProduction) {
+  app.use(raven.middleware.express.requestHandler(config.SENTRY_URL));
+}
+
 app.disable('x-powered-by');
 app.enable('strict routing');
 
@@ -26,6 +32,11 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(modifyResponse);
 app.use(routes);
+
+if (config.isProduction) {
+  app.use(raven.middleware.express.errorHandler(config.SENTRY_URL));
+}
+
 app.get('*', errorHandler);
 
 app.listen(config.port, '0.0.0.0', () => {

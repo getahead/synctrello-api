@@ -3,7 +3,7 @@
   "frontUrl": "https://synctrello.com",
   "userSecret": "syncTrello-secret-2411989",
 
-  "SENTRY_URL": "",
+  "SENTRY_URL": "https://2b7ed54a9dcb42f9a3e13892735a4215:bfd7b352fc6b4ea9bf3fab422f747d2a@sentry.io/140349",
 
   "API_URL": "https://trello.com/",
   "TRELLO_API_KEY": "8946c831b15b335bf71eec9733a09ff7",
