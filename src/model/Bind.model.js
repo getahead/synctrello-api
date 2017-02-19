@@ -9,11 +9,13 @@ const BindingSchema = new Schema({
   },
   idCard: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   idBindedCard: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   userId: {
     type: String,
