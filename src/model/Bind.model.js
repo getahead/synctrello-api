@@ -1,6 +1,15 @@
 import '../config';
 import mongoose from 'mongoose';
 
+export const EDITABLE_FIELDS = [
+  'idCard',
+  'idBindedCard',
+  'bindingEnabled',
+  'lastSynced',
+  'userLastSynced',
+  'userNameLastSynced'
+];
+
 const Schema = mongoose.Schema;
 const BindingSchema = new Schema({
   idBinding: {
@@ -84,7 +93,6 @@ BindingSchema.statics.getBindedCards = function (condition, limit = 20) {
     return Promise.resolve([]);
   }
 
-  console.log(condition)
   return this.find(condition)
     .limit(limit)
     .lean()

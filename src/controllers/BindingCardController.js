@@ -1,7 +1,7 @@
-import BindingModel from '../model/Bind.model';
+import BindingModel, {EDITABLE_FIELDS} from '../model/Bind.model';
+import mapOutput from '../lib/mapOutput';
 
 const DEFAULT_DOUBLE_BINDING_CARDS = true;
-
 
 export const copyCardController = (req, res, next) => {
   const {id, date, data, memberCreator} = req.body.action;
@@ -55,7 +55,26 @@ export const getBindings = (userId) => {
         created: binding.created,
         lastSynced: binding.lastSynced,
         userNameLastSynced: binding.userNameLastSynced,
-        enabled: binding.bindingEnabled
+        bindingEnabled: binding.bindingEnabled
       })
     ))
+};
+
+export const editBinding = ({userId, id, newValues}) => {
+  if (!userId) {
+    return Promise.reject({
+      success: false,
+      error: {
+        message: "No user Id provided"
+      }
+    });
+  }
+
+  const alowedNewValues = mapOutput(newValues, EDITABLE_FIELDS);
+  return BindingModel.findOneAndUpdate({_id: id, userId}, newValues, {upsert: true, new: true})
+    .lean()
+    .then(binding => ({
+      id: binding._id,
+      ...mapOutput(binding, Object.keys(alowedNewValues))
+    }));
 };
