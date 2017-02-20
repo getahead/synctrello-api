@@ -17,3 +17,25 @@ export const getCards = (ids, trelloToken) => {
     )
   )
 };
+
+export const searchCards = ({query = '', idBoards = '', trelloToken}) => {
+  const parsedUrl = query.match(/^https:\/\/trello\.com\/[^\s]+\/([^\s]+)$/);
+  const parsedQuery = (parsedUrl && parsedUrl[1]) ? parsedUrl[1] : query;
+
+  const url = URI(config.API_URL)
+    .pathname(`/1/search/`)
+    .query({
+      query: parsedQuery,
+      idBoards: idBoards,
+      modelTypes: 'cards',
+      card_fields: 'name,desc,shortUrl',
+      cards_limit: 20,
+      card_board: true,
+      card_list: true,
+      key: config.TRELLO_API_KEY,
+      token: trelloToken
+    });
+
+
+  return makeRequest(url.toString());
+};

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {getCards} from '../../controllers/CardsController';
+import {getCards, searchCards} from '../../controllers/CardsController';
 import {getBindings} from '../../controllers/BindingCardController';
 import {UNAUTHORIZED_RESPONSE} from '../../lib/constants';
 
@@ -25,6 +25,28 @@ router.get('/get',  (req, res) => {
       error: err
     }));
 });
+router.get('/search', (req, res) => {
+  if (!res.user.isLoggedIn) {
+    return res.send(UNAUTHORIZED_RESPONSE);
+  }
+
+  const {query, idBoards = ''} = req.query;
+  if (!query) {
+    return res.send({
+      success: true,
+      data: {
+        items: []
+      }
+    });
+  }
+
+  return searchCards({query, idBoards, trelloToken: res.user.trelloToken})
+    .then(response => res.send(response))
+    .catch(err => res.send({
+      success: false,
+      error: err
+    }));
+});
 
 router.get('/:id',  (req, res) => {
   if (!res.user.isLoggedIn) {
@@ -32,7 +54,7 @@ router.get('/:id',  (req, res) => {
   }
 
   if (!req.params.id) {
-    return res.send({success: false})
+    return res.send({success: false});
   }
 
   return getCards([req.params.id], res.user.trelloToken)
@@ -47,5 +69,6 @@ router.get('/:id',  (req, res) => {
       error: err
     }));
 });
+
 
 export default router;
