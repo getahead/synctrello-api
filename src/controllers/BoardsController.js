@@ -14,7 +14,12 @@ export const fetchAllBoards = (ids = [], field, trelloToken) => {
   return Promise.all(
     ids.map((id, index) =>
       makeRequest(url.pathname(`/1/boards/${id}`).toString())
-        .then(board => board.data)
+        .then(board => {
+          if (!board.success) {
+            throw board.error;
+          }
+          return board.data;
+        })
     )
   );
 };
@@ -86,7 +91,7 @@ export const deleteWebhook = ({idWebhook, idBoard, trelloToken}) => {
 };
 
 
-export const processBoardsData = ({boards, boardsConfig, webhooks}) => {
+export const processBoardsData = ({boards, boardsConfig, webhooks = []}) => {
   const boardsProcessed = boards.map(board => {
     const currWebhook = webhooks.find(webhook => webhook.idModel === board.id);
 

@@ -58,12 +58,15 @@ router.get('/:id',  (req, res) => {
   }
 
   return getCards([req.params.id], res.user.trelloToken)
-    .then(response => res.send({
-      success: true,
-      data: {
-        items: response
-      }
-    }))
+    .then(response => {
+
+      return res.send({
+        success: true,
+        data: {
+          items: response
+        }
+      })
+    })
     .catch(err => res.send({
       success: false,
       error: err

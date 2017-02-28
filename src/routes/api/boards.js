@@ -39,6 +39,10 @@ router.get('/get',  (req, res) => {
         }
       })
     })
+    .catch(err => res.send({
+      success: false,
+      error: err
+    }))
 });
 
 router.get('/webhook', (req, res) => {

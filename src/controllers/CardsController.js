@@ -15,7 +15,12 @@ export const getCards = (ids, trelloToken) => {
     ids.map((id, index) =>
       makeRequest(url.pathname(`/1/cards/${id}`).toString())
     )
-  )
+  ).then(res => res.reduce((result, item) => {
+    if (!item.success) {
+      throw item.error;
+    }
+    return result.concat(item.data)
+  }, []))
 };
 
 export const searchCards = ({query = '', idBoards = '', trelloToken}) => {
