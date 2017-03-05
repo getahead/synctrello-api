@@ -108,6 +108,7 @@ UserSchema.statics.authorizeUserByVerifiedTokenId = function (id) {
   return this.findById(id)
     .then(user => ({
       trelloToken: user.trelloToken,
+      trelloId: user.trelloId,
       profile: mapOutputUser(user)
     }));
 };

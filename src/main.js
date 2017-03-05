@@ -15,12 +15,14 @@ import routes from './routes';
 
 const app = express();
 
-if (config.isProduction) {
-  app.use(Raven.errorHandler(config.SENTRY_DSN));
-}
-
 app.disable('x-powered-by');
 app.enable('strict routing');
+app.set('trust proxy', true);
+
+if (config.isProduction) {
+  Raven.config(config.SENTRY_DSN).install();
+  app.use(Raven.requestHandler());
+}
 
 app.use(slashesMiddleware);
 app.use(checkUriMiddleware);
@@ -34,10 +36,9 @@ app.use(modifyResponse);
 app.use(routes);
 
 if (config.isProduction) {
-  app.use(Raven.errorHandler(config.SENTRY_DSN));
+  app.use(Raven.errorHandler());
 }
-
-app.get('*', errorHandler);
+app.use(errorHandler);
 
 app.listen(config.port, '0.0.0.0', () => {
   console.log(`Server started at http://localhost:${config.port}`);

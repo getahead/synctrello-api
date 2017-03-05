@@ -34,7 +34,8 @@ export default function userMiddleware(req, res, next) {
       res.user = {
         isLoggedIn: true,
         profile: result.profile,
-        trelloToken: result.trelloToken
+        trelloToken: result.trelloToken,
+        trelloId: result.trelloId
       };
 
       return next();

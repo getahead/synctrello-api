@@ -33,10 +33,11 @@ export const searchCards = ({query = '', idBoards = '', trelloToken}) => {
       query: parsedQuery,
       idBoards: idBoards,
       modelTypes: 'cards',
-      card_fields: 'name,desc,shortUrl',
+      card_fields: 'name,desc,shortUrl,closed',
       cards_limit: 20,
       card_board: true,
       card_list: true,
+      partial: true,
       key: config.TRELLO_API_KEY,
       token: trelloToken
     });
