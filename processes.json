@@ -8,12 +8,12 @@
     "env_staging": {
       "NODE_ENV": "staging",
       "BABEL_DISABLE_CACHE": 1,
-      "PORT": 3001
+      "PORT": 3002
     },
     "env": {
       "NODE_ENV": "production",
       "BABEL_DISABLE_CACHE": 1,
-      "PORT": 3001
+      "PORT": 3002
     }
   }]
 }
