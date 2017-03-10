@@ -12,7 +12,9 @@ const mapOutputUser = (user) => ({
   username: user.username,
   locale: user.locale,
   idBoards: user.idBoards,
-  avatar: `${AVATAR_HOST}${user.avatarHash}/170.png`
+  avatar: `${AVATAR_HOST}${user.avatarHash}/170.png`,
+  bindingsCreate: user.bindingsCreate,
+  defaultBindings: user.defaultBindings
 });
 const signToken = (id) =>
   jwt.sign({id}, config.userSecret, { expiresIn: TOKEN_EXPIRATION_TIME });
@@ -37,9 +39,15 @@ const UserSchema = new Schema({
     },
     // required: [true, 'Email is required']
   },
-  hashedPassword: {
+  bindingsCreate: {
     type: String,
-    // required: true
+    enum: ['onCopy', 'onCopyOnlyMe', 'manual'],
+    default: 'onCopy'
+  },
+  defaultBindings: {
+    type: String,
+    enum: ['oneWay', 'doubleWay'],
+    default: 'doubleWay'
   },
   salt: {
     type: String,
@@ -106,11 +114,17 @@ UserSchema.statics.findUserAndSync = function (trelloToken, trelloUser, updateTo
  */
 UserSchema.statics.authorizeUserByVerifiedTokenId = function (id) {
   return this.findById(id)
-    .then(user => ({
-      trelloToken: user.trelloToken,
-      trelloId: user.trelloId,
-      profile: mapOutputUser(user)
-    }));
+    .then(user => {
+      if (!user) {
+        throw 'User not found';
+      }
+
+      return {
+        trelloToken: user.trelloToken,
+        trelloId: user.trelloId,
+        profile: mapOutputUser(user)
+      }
+    });
 };
 
 /**

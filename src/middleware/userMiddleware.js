@@ -40,5 +40,13 @@ export default function userMiddleware(req, res, next) {
 
       return next();
     })
-    .catch(err => next(err));
+    .catch(err => {
+      res.user = {
+        isLoggedIn: false,
+        profile: {},
+        trelloToken: ''
+      };
+
+      next();
+    });
 }

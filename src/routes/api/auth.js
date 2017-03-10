@@ -15,7 +15,7 @@ router.get('/trello', (req, res) => {
         .query({
           key: config.TRELLO_API_KEY,
           expiration: 'never',
-          name: 'SyncoBot',
+          name: 'Sync Trello',
           response_type: 'token',
           return_url: `${req.query.origin || config.frontUrl}/action/social-login/finish/`,
           callback_method: `postMessage`,
